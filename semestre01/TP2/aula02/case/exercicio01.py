@@ -1,4 +1,4 @@
-letra = input("Digite uma letra qualquer: ")
+letra = str(input("Digite uma letra qualquer: "))
 
 match letra.lower():
     case "a":
