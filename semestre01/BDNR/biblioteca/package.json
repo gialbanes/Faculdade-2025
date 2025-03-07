@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "biblioteca": "file:",
     "mongodb": "^6.13.1"
   }
 }

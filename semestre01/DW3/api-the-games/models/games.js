@@ -8,6 +8,6 @@ const gameSchema = new mongoose.Schema({
 });
 
 // Aqui está sendo criado a coleção games no banco de dados
-const Game = mongoose.model("Game", gameSchema);
+const Game = mongoose.model("Games", gameSchema);
 
 export default Game;
