@@ -16,16 +16,26 @@ async function main() {
         // selecionar a coleção "livros"
         const livros = database.collection('livros');
 
+        /*
         // inserindo dados no bd
         await livros.insertMany([
             {titulo: 'Dom Casmurro', autor: 'Machado de Assis', ano : 1899, genero : 'Romance'},
             {titulo: 'Memórias Póstumas de Brás Cubas', autor: 'Machado de Assis', ano : 1881, genero : 'Romance'},
             {titulo: 'O Alienista', ano : 1882, autor: 'Machado de Assis', genero : 'Conto'}
         ]);
+        */
+
+        /*
+        // consultar todos os documentos
+        const todosLivros = await livros.find().toArray();
+        console.log("Livros:", todosLivros);
+        */
+
     }finally{
         await client.close();
     }
 }
+
 
 // chama a função principal e captura o erro, se houver 
 main().catch(console.error);
