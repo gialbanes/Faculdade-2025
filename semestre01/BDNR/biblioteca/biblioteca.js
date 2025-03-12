@@ -1,22 +1,22 @@
-// importar o módulo MongoClient 
-const {MongoClient} = require('mongodb');
+// importar o módulo MongoClient
+const { MongoClient } = require("mongodb");
 
-// função principal 
+// função principal
 async function main() {
-    // definir a uri de conexão com o MongoDB
-    const uri = "mongodb://127.0.0.1:27017";
-    // criar uma instância do MongoClient
-    const client = new MongoClient(uri);
+  // definir a uri de conexão com o MongoDB
+  const uri = "mongodb://127.0.0.1:27017";
+  // criar uma instância do MongoClient
+  const client = new MongoClient(uri);
 
-    try {   
-        // connect com o servidor mongodb
-        await client.connect();
-        // selecionar o banco de dados
-        const database = client.db('biblioteca');
-        // selecionar a coleção "livros"
-        const livros = database.collection('livros');
+  try {
+    // connect com o servidor mongodb
+    await client.connect();
+    // selecionar o banco de dados
+    const database = client.db("biblioteca");
+    // selecionar a coleção "livros"
+    const livros = database.collection("livros");
 
-        /*
+    /*
         // inserindo dados no bd
         await livros.insertMany([
             {titulo: 'Dom Casmurro', autor: 'Machado de Assis', ano : 1899, genero : 'Romance'},
@@ -25,17 +25,29 @@ async function main() {
         ]);
         */
 
-        /*
+    /*
         // consultar todos os documentos
         const todosLivros = await livros.find().toArray();
         console.log("Livros:", todosLivros);
         */
 
-    }finally{
-        await client.close();
-    }
+        
+    // atualizar um documento
+    await livros.updateOne(
+      { titulo: 1881 }, // filtro para encontrar registro
+      { $set: { ano: 1700 } } // valor atualizado
+    );
+    
+
+    /*
+    // excluir um documento do bd
+    await livros.deleteOne({ titulo: "Dom Casmurro" });
+    */
+
+  } finally {
+    await client.close();
+  }
 }
 
-
-// chama a função principal e captura o erro, se houver 
+// chama a função principal e captura o erro, se houver
 main().catch(console.error);
