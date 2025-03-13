@@ -1,0 +1,11 @@
+{
+    "name": "fatec-dsm3/biblioteca",
+    "autoload": {
+        "psr-4": {
+            "FatecDsm3\\Biblioteca\\": "src/"
+        }
+    },
+    "require": {
+        "kreait/firebase-php": "^5.26"
+    }
+}
