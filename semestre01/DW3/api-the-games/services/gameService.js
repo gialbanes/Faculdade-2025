@@ -52,5 +52,15 @@ class gameService {
       console.log(error);
     }
   }
+
+  // Função para listar um único jogo
+  async getOne(id) {
+    try {
+      const game = await Game.findOneAndDelete({_id:id}) // o primeiro é o id do BD e o outro oq eu vou enviar 
+      return game;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 export default new gameService();
