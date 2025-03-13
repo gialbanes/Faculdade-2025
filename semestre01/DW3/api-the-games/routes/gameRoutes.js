@@ -11,4 +11,7 @@ gameRoutes.post("/games", gameController.createGame);
 
 // Endpoint para deletar um game
 gameRoutes.delete("/games/:id", gameController.deleteGame);
+
+// Endpoint para alterar um game
+gameRoutes.put("/games", gameController.updateGame);
 export default gameRoutes;
