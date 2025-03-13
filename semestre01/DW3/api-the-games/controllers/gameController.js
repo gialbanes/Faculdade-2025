@@ -64,4 +64,4 @@ const updateGame = async (req, res) => {
     res.status(500).jso({ error: "Erro interno do servidor." });
   }
 };
-export default { getAllGames, createGame, deleteGame };
+export default { getAllGames, createGame, deleteGame, updateGame };
