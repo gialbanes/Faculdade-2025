@@ -39,11 +39,29 @@ const deleteGame = async (req, res) => {
       res.sendStatus(204); // Código de 204 (NO CONTENT)
     } else {
       res.sendStatus(400); // Código de 400 (BAD REQUEST)
-      // Requisição mal formada 
+      // Requisição mal formada
     }
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Erro interno no servidor." });
+  }
+};
+
+// Função para alterar um jogo
+const updateGame = async (req, res) => {
+  try {
+    if (ObjectId.isValid(req.params.id)) {
+      const id = req.params.id;
+      // Desestruturação
+      const { title, plataform, year, price } = req.body;
+      gameService.Update(id, title, plataform, year, price);
+      res.sendStatus(200) // Código 220 (OK): requisição bem sucedida 
+    } else {
+      res.sendStatus(400); // Código 400 (BAD REQUEST): Requisição mal formada
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).jso({ error: "Erro interno do servidor." });
   }
 };
 export default { getAllGames, createGame, deleteGame };
