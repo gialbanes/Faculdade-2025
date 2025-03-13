@@ -61,7 +61,21 @@ const updateGame = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).jso({ error: "Erro interno do servidor." });
+    res.status(500).json({ error: "Erro interno do servidor." });
   }
 };
+
+// Função para buscar um único jogo
+const getOneGame = async (req, res) => {
+  try {
+    if(ObjectId.isValid(req.params.id)) {
+      const id = req.params.id;
+      const game = await gameService.getOne(id);
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500); // Erro interno do servidor 
+  }
+}
 export default { getAllGames, createGame, deleteGame, updateGame };
