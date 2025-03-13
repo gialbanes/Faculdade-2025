@@ -37,5 +37,20 @@ class gameService {
       console.log(error);
     }
   }
+
+  // Função para alterar jogos
+  async Update(id, title, pltaform, year, price) {
+    try {
+      await Game.findByIdAndUpdate(id, {
+        title,
+        plataform,
+        year,
+        price,
+      });
+      console.log(`Dados do game com a id: {id} alterados com sucesso!`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 export default new gameService();
