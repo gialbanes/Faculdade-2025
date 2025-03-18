@@ -65,17 +65,24 @@ const updateGame = async (req, res) => {
   }
 };
 
+
 // Função para buscar um único jogo
 const getOneGame = async (req, res) => {
   try {
-    if(ObjectId.isValid(req.params.id)) {
+    if (ObjectId.isValid(req.params.id)) {
       const id = req.params.id;
       const game = await gameService.getOne(id);
+      if (!game) {
+        res.sendStatus(404); // Código 404: NOT FOUND - Não encontrado
+      } else {
+        res.status(200).json({ game });
+      }
+    } else {
+      res.sendStatus(400); // Código 400: Bad Request
     }
-
   } catch (error) {
     console.log(error);
-    res.sendStatus(500); // Erro interno do servidor 
+    res.sendStatus(500); // Erro interno do servidor
   }
-}
-export default { getAllGames, createGame, deleteGame, updateGame };
+};
+export default { getAllGames, createGame, deleteGame, updateGame, getOneGame };
