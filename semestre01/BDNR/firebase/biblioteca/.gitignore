@@ -9,3 +9,6 @@
 # Configurações do ambiente
 .env
 .env.local
+
+# Chave de criptografia
+/assets/config/* 
