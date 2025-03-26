@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de receitas</title>
+    <link href="https://stack.path.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel=""stylesheet>
+</head>
+<body class="container">
+    <h1 class="my-4">Receitas</h1>
+    <!-- Formulário de busca -->
+     <form action="/" method="GET" class="mb-4">
+        <div class="form-group">
+            <input type="text" name="search" class="form-control" placeholder="Buscar receita pelo nome" value="<%=searchQuery || ''%>">
+        </div>
+     </form>
+    
+</body>
+</html>
