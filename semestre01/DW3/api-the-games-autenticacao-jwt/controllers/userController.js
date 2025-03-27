@@ -1,6 +1,7 @@
 import userService from "../services/userService.js";
 import jwt from "jsonwebtoken";
 //JWTSecret
+// preciso exportar pra usar no middleware
 const JWTSecret = "apigamessecret";
 
 // cadastrando um usuário
@@ -60,4 +61,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-export default { createUser, loginUser };
+export default { createUser, loginUser, JWTSecret };
