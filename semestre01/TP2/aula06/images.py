@@ -31,11 +31,11 @@ def escolher_imagem():
 btn_escolher = Button(tela, text="Escolher imagem", command=escolher_imagem)
 btn_escolher.place(x=10, y=140)
 
-foto_salvar = PhotoImage(file = r"icones\salvar.png")
-foto_excluir = PhotoImage(file = r"icones\excluir.png")
-foto_alterar = PhotoImage(file = r"icones\alterar.png")
-foto_consultar = PhotoImage(file = r"icones\consultar.png")
-foto_sair = PhotoImage(file = r"icones\sair.png")
+foto_salvar = PhotoImage(file = r"icones/salvar.png")
+foto_excluir = PhotoImage(file = r"icones/excluir.png")
+foto_alterar = PhotoImage(file = r"icones/alterar.png")
+foto_consultar = PhotoImage(file = r"icones/consultar.png")
+foto_sair = PhotoImage(file = r"icones/sair.png")
 
 btn_salvar = Button(tela, text="Salvar", image=foto_salvar, compound=TOP).place(x=130, y=310)
 btn_excluir = Button(tela, text="Excluir", image=foto_excluir, compound=TOP).place(x=200, y=310)
