@@ -27,7 +27,7 @@ class livroService {
   async Delete(id) {
     try {
       await Livro.findByIdAndDelete(id);
-      console.log(`Livro com a id: ${id} foi dleetado.`);
+      console.log(`Livro com a id: ${id} foi deletado.`);
     } catch (error) {
       console.log(error);
     }
