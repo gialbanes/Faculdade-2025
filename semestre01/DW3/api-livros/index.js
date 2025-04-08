@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 import livroRoutes from "./routes/livroRoutes.js";
 import Livro from "./models/Livros.js";
-import mongoose from './config/db-connection.js';
+import mongoose from "./config/db-connection.js";
 
 // Importação Swagger
 import swaggerUi from "swagger-ui-express";
