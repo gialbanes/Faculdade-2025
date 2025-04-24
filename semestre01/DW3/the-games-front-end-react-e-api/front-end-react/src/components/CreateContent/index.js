@@ -15,13 +15,6 @@ const CreateContent = () => {
           className="inputPrimary"
         />
         <input
-          type="text"
-          name="platform"
-          id="platform"
-          placeholder="Insira a plataforma do jogo"
-          className="inputPrimary"
-        />
-        <input
           type="number"
           name="year"
           id="year"
@@ -33,6 +26,27 @@ const CreateContent = () => {
           name="price"
           id="price"
           placeholder="Insira o preço do jogo"
+          className="inputPrimary"
+        />
+        <input
+          type="text"
+          name="platform"
+          id="platform"
+          placeholder="Insira a plataforma do jogo"
+          className="inputPrimary"
+        />
+        <input
+          type="text"
+          name="genre"
+          id="genre"
+          placeholder="Insira o gênero do jogo"
+          className="inputPrimary"
+        />
+        <input
+          type="text"
+          name="rating"
+          id="rating"
+          placeholder="Insira a classificação do jogo"
           className="inputPrimary"
         />
         <input
