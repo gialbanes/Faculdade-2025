@@ -49,12 +49,21 @@ def logout():
 opcoes_menu_gestao.add_command(label="Animais", command=abrir_tela_animais)
 opcoes_menu_gestao.add_command(label="Clientes", command=abrir_tela_clientes)
 
+# função para carregar e redimensionar imagens
+def carregar_imagem(caminho, largura, altura):
+    imagem = Image.open(caminho)
+    imagem = imagem.resize((largura, altura))
+    return ImageTk.PhotoImage(imagem)
+
+imagem_fundo = carregar_imagem(r"icones\imagem_fundo.jpg", 100, 700)
+
+
 # ícones do menu 
-foto_sair = PhotoImage(file=r"icones\sair.png")
-foto_animais = PhotoImage(file=r"icones\logo_animais.png")
-foto_usuarios = PhotoImage(file=r"icones\logo_usuarios.png")
-foto_servicos = PhotoImage(file=r"icones\logo_servicos.png")
-foto_logout = PhotoImage(file=r"icones\logout.png")
+foto_sair = carregar_imagem(r"icones\sair.png", 100, 100)
+foto_animais = carregar_imagem(r"icones\logo_animais.png", 100, 100)
+foto_usuarios = carregar_imagem(r"icones\logo_usuarios.png", 100, 100)
+foto_servicos = carregar_imagem(r"icones\logo_servicos.png", 100, 100)
+foto_logout = carregar_imagem(r"icones\logout.png", 100, 100)
 
 # botões do menu 
 lbl_logo = Label(tela, text="PET SHOP DOG'S", compound=TOP, image=foto_sair).place(x=890, y=580)
