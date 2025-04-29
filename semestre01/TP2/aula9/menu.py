@@ -72,5 +72,14 @@ btn_clientes = Button(tela, text="Clientes", compound=TOP, command=abrir_tela_cl
 btn_servicos = Button(tela, text="Serviços", compound=TOP, image=foto_servicos).place(x=550, y=200)
 btn_logout = Button(tela, text="Logout", compound=TOP, command=logout,image=foto_logout).place(x=800, y=200)
 
+
+largura_screen = tela.winfo_screenwidth()
+altura_screen = tela.winfo_screenheight()
+
+posx = largura_screen / 2 - largura / 2
+posy = altura_screen / 2 - altura / 2 
+
+tela.geometry("%dx%d+%d+%d" % (largura, altura, posx, posy))
+
 tela.config(menu=barra_menus)
 tela.mainloop()
