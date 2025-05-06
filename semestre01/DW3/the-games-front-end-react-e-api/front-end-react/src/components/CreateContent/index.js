@@ -1,7 +1,8 @@
 import { useState } from "react";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import styles from "@/components/CreateContent/CreateContent.module.css";
 import axios from "axios";
+
 const CreateContent = () => {
   // Criando os estados para as informações do jogo
   const [title, setTitle] = useState("");
@@ -10,40 +11,41 @@ const CreateContent = () => {
   const [rating, setRating] = useState("");
   const [year, setYear] = useState("");
   const [price, setPrice] = useState("");
+  // Carregando o router
   const router = useRouter();
- 
-  // tratando a submissao do formulario
-  const handleSubmit = async (event) =>{
+
+  // Tratando a submissão do formulário
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if(title && platform && genre && rating && year && price !== ""){
-      const game ={
-        title : title,
+
+    // VALIDAÇÃO DO FORMULÁRIO (CAMPOS VAZIOS)
+    if (title && platform && genre && rating && year && price !== "") {
+      const game = {
+        title: title,
         year: year,
-        price : price,
-        descriptions:{
+        price: price,
+        descriptions: {
           platform: platform,
           genre: genre,
           rating: rating,
         },
       };
-      try{
-        const response = await axios.post("http://localhost:4000/games", game)
-        if (response.status === 201){
-            alert("Game cadastrado com sucesso!");
-            router.push("/home");
+      // FAZENDO POST NA API PARA CADASTRO
+      try {
+        const response = await axios.post("http://localhost:4000/games", game);
+        if (response.status === 201) {
+          alert("Game cadastrado com sucesso!");
+          router.push("/home");
         }
-      } catch(error){
+      } catch (error) {
         console.log(error);
       }
       // console.log(game)
-    } else{
-      alert("Por favor, preecha todos os campos!")
+    } else {
+      alert("Por favor, preencha todos os campos.");
     }
   };
- 
- 
- 
- 
+
   return (
     <div className={styles.createContent}>
       <div className="title">
@@ -122,6 +124,5 @@ const CreateContent = () => {
     </div>
   );
 };
- 
+
 export default CreateContent;
- 

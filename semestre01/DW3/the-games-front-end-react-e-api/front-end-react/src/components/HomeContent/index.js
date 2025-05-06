@@ -49,6 +49,15 @@ const HomeContent = () => {
     setSelectedGame(null);
   };
 
+  // Função para atalizar o jogo editado na lista
+  const handleUpdate = (updatedGame) => {
+    setGames(
+      // vai percorrer o array games e se o id do jogo for igual ao id do jogo atualizado, o jogo atualizado vira o jogo, se não for igual, o jogo continua o mesmo
+      games.map((game) => (game._id === updatedGame._id ? updatedGame : game))
+    );
+    closeEditModal();
+  };
+
   return (
     <>
       <div className={styles.homeContent}>
@@ -106,11 +115,11 @@ const HomeContent = () => {
             ))}
           </div>
         </div>
-        {/* renderização condicional do modal de edição */}
-        {/* aqui ele renderiza o model de edição -> editContent */}
-        {/* seria como um if para renderizar o modal se um jogo for selecionado, caso não tiver jogo, ele ignora depois do &&  */}
+        {/* Renderização condicional */}
         {selectedGame && (
-          <EditContent game={selectedGame} onClose={closeEditModal} />
+          // props posso passar função ou objeto
+          // O objeto game é o jogo que foi clicado para editar
+          <EditContent game={selectedGame} onClose={closeEditModal} handleUpdate={handleUpdate}/>
         )}
       </div>
     </>

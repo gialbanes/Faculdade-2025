@@ -56,8 +56,8 @@ const updateGame = async (req, res) => {
       // Desestruturação
       //const title = req.body.title
       const { title, year, price, descriptions } = req.body;
-      gameService.Update(id, title, year, price, descriptions);
-      res.sendStatus(200); // Código 200 (OK): Requisição bem sucedida
+      const game = await gameService.Update(id, title, year, price, descriptions);
+      res.status(200).json({game}); // Código 200 (OK): Requisição bem sucedida
     } else {
       res.sendStatus(400); // Código 400 (Bad Request): Requisição mal formada
     }
