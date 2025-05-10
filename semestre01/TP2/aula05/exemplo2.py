@@ -1,15 +1,16 @@
+# importar o tkinter
 from tkinter import * 
+
+# criação da varável da tela
 tela = Tk()
 
-txt_nome = Entry(tela, width=50)
-txt_nome.pack() # função para ser exibido dentro do componente pai, no caso, a tela 
-txt_nome.insert(0, "Digite seu nome: ")
+# título da janela 
+tela.title("Fatec Registro")
 
-def clicar():
-    lbl_nome = Label(tela, text="Bem-vindo, " + txt_nome.get())
-    lbl_nome.pack()
+# config da cor de fundo 
+tela.configure(background="red")
 
-btn_botao = Button(tela, text="Clique", command=clicar)
-btn_botao.pack()
+# config do tamanho da janela 
+tela.geometry("700x600")
 
 tela.mainloop()
