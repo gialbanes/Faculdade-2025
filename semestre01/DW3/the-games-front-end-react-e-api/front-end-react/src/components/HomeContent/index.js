@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "@/components/HomeContent/HomeContent.module.css";
 import Loading from "../Loading";
 import EditContent from "../EditContent";
+import { axiosConfig } from "@/services/auth";
 
 const HomeContent = () => {
   const [games, setGames] = useState([]);
@@ -12,7 +13,7 @@ const HomeContent = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/games");
+        const response = await axios.get("http://localhost:4000/games", axiosConfig); // envio o cabeçalho junto pq agora as rotas estão trancadas
         setGames(response.data.games);
         // console.log(response.data.games);
       } catch (error) {
@@ -28,7 +29,7 @@ const HomeContent = () => {
   const deleteGame = async (gameId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/games/${gameId}`
+        `http://localhost:4000/games/${gameId}`, axiosConfig
       );
       if (response.status === 204) {
         alert("O jogo foi excluído com sucesso.");

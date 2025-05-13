@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "@/components/CreateContent/CreateContent.module.css";
 import axios from "axios";
+import { axiosConfig } from "@/services/auth";
 
 const CreateContent = () => {
   // Criando os estados para as informações do jogo
@@ -32,7 +33,7 @@ const CreateContent = () => {
       };
       // FAZENDO POST NA API PARA CADASTRO
       try {
-        const response = await axios.post("http://localhost:4000/games", game);
+        const response = await axios.post("http://localhost:4000/games", game, axiosConfig);
         if (response.status === 201) {
           alert("Game cadastrado com sucesso!");
           router.push("/home");
