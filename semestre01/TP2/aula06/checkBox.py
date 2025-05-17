@@ -6,7 +6,7 @@ tela.geometry("300x300")
 def show():
     Label(tela, text=var.get()).pack()
 
-var = StringVar()
+var = StringVar() # variável que vai guardar as opções do checkbox 
 
 chk_button = Checkbutton(tela, text="Check box", variable=var, onvalue="On", offvalue="off")
 chk_button.deselect() # já inicia a caixinha desmarcada

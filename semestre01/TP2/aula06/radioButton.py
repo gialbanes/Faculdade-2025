@@ -1,19 +1,14 @@
 from tkinter import *
+
 tela = Tk()
+tela.title("Radio Button")
+tela.configure(background="grey")
+tela.geometry("600x600")
 
-tela.title("Radio Buttons")
+var = StringVar() # guarda o valor selecionado dos botões de opção
+var.set("m") # ao abrir o app, o padrão já vai vir com o m selecionado 
 
-#cor da tela
-tela.configure(background="#1e3743")
-
-#configurar o tamanho da tela
-tela.geometry("700x600")
-
-# classe que permite utilizar o método set por padrão
-var = StringVar()
-var.set("m")
-
-rdb_button = Radiobutton(tela, text="M", variable=var, value="m").place(x=20, y=40)
-rdb_button = Radiobutton(tela, text="F", variable=var, value="f").place(x=20, y=60)
+rdb_buttonm = Radiobutton(tela, text="M", variable=var, value="m").place(x=20, y=40) # var recebe o valor M se essa for a opção escolhida
+rdb_buttonf = Radiobutton(tela, text="F", variable=var, value="f").place(x=20, y=60) # var recebe o valor F se essa for a opção escolhida
 
 tela.mainloop()

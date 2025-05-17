@@ -1,23 +1,30 @@
 from tkinter import *
-from tkinter import filedialog
-from PIL import Image, ImageTk
+from tkinter import filedialog # módulo para pegar imgs do pc 
+from PIL import Image, ImageTk # para manipular imagens
 
 tela = Tk()
 tela.geometry("700x400")
 
+# pasta inicial ao abrir o seletor de imagem 
 pasta_inicial = ""
 
 def escolher_imagem():
-    #localização e tipos dos arquivos a serem utilizados
-    caminho_imagem = filedialog.askopenfilename(initialdir=pasta_inicial, title="Escolha uma imagem", filetypes=(("Arquivos de imagem", "*.jpg;*.jpeg;*.png"), ("Todos os arquivos", "*.*")))
+    # abre uma janela pra escolher a imagem 
+    caminho_imagem = filedialog.askopenfilename(
+        initialdir=pasta_inicial, # diretório inicial da janela 
+        title="Escolha uma imagem", # título da janela 
+        filetypes=(("Arquivos de imagem", "*.jpg;*.jpeg;*.png"), 
+                   ("Todos os arquivos", "*.*"))) # tipos de arquivos aceitos 
 
     # abertura do arquivo através do PIL
     imagem_pil = Image.open(caminho_imagem)
-    largura, altura = imagem_pil.size
+    largura, altura = imagem_pil.size # pega o tamanho original da imagem 
+    
+    # se a img for muito larga ela é redimensionada 
     if largura > 150:
         proporcao = largura / 150
         nova_altura = int(altura/proporcao)
-        #redimensionamento 
+        # redimensionamento mantendo a proporção
         imagem_pil = imagem_pil.resize((110, nova_altura))
 
     # covertendo a imagm para o formato compatível ao tkinter
