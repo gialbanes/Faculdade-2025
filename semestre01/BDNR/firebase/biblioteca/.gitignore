@@ -1,0 +1,14 @@
+# Dependências do Composer
+/vendor/
+/composer.lock
+
+# Arquivos temporários e de cache
+*.log
+*.cache
+
+# Configurações do ambiente
+.env
+.env.local
+
+# Chave de criptografia
+/assets/config/* 

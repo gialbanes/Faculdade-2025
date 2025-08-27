@@ -1,0 +1,11 @@
+/semestre01/TP2/aula10/poo/nbproject/
+/semestre01/TP2/aula10/poo/.ropeproject/
+
+# Ignorar arquivos e pastas do Next.js
+.next/
+*.log
+*.gz
+
+# Ignorar node_modules
+node_modules/
+

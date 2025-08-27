@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar receitas</title>
+</head>
+<body class="container">
+  <h1 class="my-4">Editar receita</h1>
+  <!-- FORMULÁRIO PARA EDIÇÃO DE RECEITA -->
+   <form action="/editar/<%=receita._id%>" method="post">
+    <div class="form-group">
+        <input type="text" name="nome" class="form-control" value="<%=receita.home%>" required>
+    </div>
+    <div class="form-group">
+        <textarea name="ingredientes" class="form-control" required><%=receita.ingredientes.join(',')%></textarea>
+    </div>
+    <div class="form-group">
+        <textarea name="instrucoes" class="form-control" required><%=receita.instruoes.join(',')%></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar alterações</button>
+
+    <a href="/" class="btn btn-primary">Cancelar</a>
+   </form>  
+</body>
+</html>
