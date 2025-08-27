@@ -1,0 +1,26 @@
+    {% extends 'base.html' %}
+    
+    {% block content %}
+    <h1>Cadastro de receitas</h1>
+    <hr>
+    <form action="{{ url_for('newRecipe') }}" method="POST">
+        <label>Nome:</label>
+        <input type="text" name="name">
+        <label>Ingredientes:</label>
+        <input type="text" name="ingredients">
+        <label>Nacionalidade:</label>
+        <input type="text" name="nacionality">
+        <input type="submit" value="Cadastrar">
+    </form>
+    <br>
+    <hr>
+    <table>
+        {% for recipe in recipeList %}
+        <tr>
+            <td>{{recipe.Nome}}</td>
+            <td>{{recipe.Ingredientes}}</td>
+            <td>{{recipe.Nacionalidade}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endblock content %}
