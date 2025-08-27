@@ -7,7 +7,7 @@ import gameRoutes from "./routes/gameRoutes.js";
 
 
 // Configurações do Express
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended:  false }));
 app.use(express.json());
 app.use("/", gameRoutes)
 
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   //   res.send("API iniciada com sucesso!");
   const games = [
     {
-      title: "Game 1",
+      title: "Game 1",  
       year: 2020,
       platform: "PC",
       price: 20,
