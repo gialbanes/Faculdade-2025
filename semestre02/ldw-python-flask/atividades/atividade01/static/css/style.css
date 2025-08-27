@@ -1,0 +1,127 @@
+
+/* Paleta de Cores */
+:root {
+    --purple: #6F42C1;
+    --blue: #007bff;
+    --orange: #FD7E14;
+    --orange-hover: #e66b0e;
+}
+
+/* Estilo da Navbar */
+.custom-navbar {
+    background: linear-gradient(45deg, var(--orange) 0%, var(--orange-hover) 100%);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.custom-navbar .navbar-brand {
+    color: white;
+    font-weight: 600;
+}
+
+.custom-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.custom-navbar .nav-link:hover {
+    color: white;
+}
+
+/* Estilo do Botão */
+.custom-btn-nav {
+    background-color: var(--orange);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-btn-nav:hover {
+    background-color: var(--orange-hover);
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #E6E9EE !important;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #42464D;
+    color: white;
+}
+/* Card estilo centralizado */
+.custom-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 40px;
+    max-width: 800px;   /* <-- aumentei a largura */
+    width: 100%;
+    margin: 60px auto;  /* <-- adiciona margem em cima e embaixo */
+}
+
+/* Inputs */
+.custom-input {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease;
+}
+
+.custom-input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 6px rgba(0,123,255,0.3);
+    outline: none;
+}
+
+/* Botão laranja */
+.custom-btn {
+    background-color: var(--orange);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: var(--orange-hover);
+}
+
+/* Tabela dentro do card */
+.custom-card table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Ajuste do container principal */
+.d-flex.flex-column {
+    margin-top: 50px;   /* margem extra da navbar */
+    margin-bottom: 50px; /* margem extra do footer */
+}
+/* Botão estilo da imagem */
+.custom-btn {
+    background: var(--orange);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    display: inline-block;
+}
+
+/* Efeito hover */
+.custom-btn:hover {
+    background: var(--orange-hover);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
