@@ -29,9 +29,45 @@
       </div>
 </nav>
 
-    {% block content %}
-        <!-- Aqui irá o conteúdo das outras páginas -->
-    {% endblock %}
+{% block content %}
+<div class="container mt-5 pt-5">
+    <h3 class="mb-3">Receitas populares</h3>
+    <div class="row mb-5">
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/carbonara.png') }}" class="card-img-top" alt="Spaghetti Carbonara">
+                <div class="card-body text-center">
+                    <p class="card-text">Carbonara</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/avocado.png') }}" class="card-img-top" alt="Avocado Toast">
+                <div class="card-body text-center">
+                    <p class="card-text">Avocado Toast</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/salmao.png') }}" class="card-img-top" alt="Grilled Salmon">
+                <div class="card-body text-center">
+                    <p class="card-text">Salmão grelhado</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/bolo.png') }}" class="card-img-top" alt="Chocolate Cake">
+                <div class="card-body text-center">
+                    <p class="card-text">Bolo de chocolate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
 <footer>
         <p style="text-align: center;">Todos os direitos reservados &reg;</p>
