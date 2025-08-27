@@ -1,46 +1,53 @@
-
 /* Paleta de Cores */
 :root {
     --purple: #6F42C1;
     --blue: #007bff;
     --orange: #FD7E14;
+    --orange-light: #FF9F50; /* cor mais clara para o degradê */
     --orange-hover: #e66b0e;
 }
 
 /* Estilo da Navbar */
 .custom-navbar {
-    background: linear-gradient(45deg, var(--orange) 0%, var(--orange-hover) 100%);
+    background: linear-gradient(90deg, var(--orange) 0%, var(--orange-light) 100%);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .custom-navbar .navbar-brand {
     color: white;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .custom-navbar .nav-link {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .custom-navbar .nav-link:hover {
-    color: white;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
 }
 
-/* Estilo do Botão */
+/* Estilo do Botão da Navbar */
 .custom-btn-nav {
-    background-color: var(--orange);
+    background: linear-gradient(90deg, var(--orange), var(--orange-light));
     border: none;
     color: white;
     font-weight: 600;
     padding: 8px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    border-radius: 20px; /* botão mais arredondado */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .custom-btn-nav:hover {
-    background-color: var(--orange-hover);
+    background: var(--orange-hover);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
+
+/* Body */
 body {
     display: flex;
     flex-direction: column;
@@ -51,18 +58,19 @@ body {
 
 footer {
     margin-top: auto;
-    background-color: #42464D;
+    background: linear-gradient(90deg, var(--orange) 0%, var(--orange-light) 100%);
     color: white;
 }
+
 /* Card estilo centralizado */
 .custom-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     padding: 40px;
-    max-width: 800px;   /* <-- aumentei a largura */
+    max-width: 800px;
     width: 100%;
-    margin: 60px auto;  /* <-- adiciona margem em cima e embaixo */
+    margin: 60px auto;
 }
 
 /* Inputs */
@@ -79,19 +87,25 @@ footer {
     outline: none;
 }
 
-/* Botão laranja */
+/* Botão laranja padrão */
 .custom-btn {
-    background-color: var(--orange);
+    background: linear-gradient(90deg, var(--orange), var(--orange-light));
     color: white;
     font-weight: 600;
     border: none;
-    padding: 12px;
+    padding: 12px 24px;
     border-radius: 8px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    display: inline-block;
 }
 
+/* Hover do botão */
 .custom-btn:hover {
-    background-color: var(--orange-hover);
+    background: var(--orange-hover);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
 }
 
 /* Tabela dentro do card */
@@ -102,26 +116,6 @@ footer {
 
 /* Ajuste do container principal */
 .d-flex.flex-column {
-    margin-top: 50px;   /* margem extra da navbar */
-    margin-bottom: 50px; /* margem extra do footer */
-}
-/* Botão estilo da imagem */
-.custom-btn {
-    background: var(--orange);
-    border: none;
-    color: #fff;
-    font-weight: 600;
-    padding: 12px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    text-align: center;
-    display: inline-block;
-}
-
-/* Efeito hover */
-.custom-btn:hover {
-    background: var(--orange-hover);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
