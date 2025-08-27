@@ -1,19 +1,44 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content %}
+<div class="container my-5 pt-5">
+    <h2 class="text-center mb-4" style="color: var(--orange); font-weight: 700;">
+        Nossas receitas deliciosas 🍲
+    </h2>
 
-    <h3>Receitas do top 10:</h3>
-    <ol>
+    <div class="row g-4">
         {% for ingredient in ingredients %}
-            <li>{{ingredient}}</li>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+                <img src="{{ url_for('static', filename='images/placeholder.png') }}" 
+                     class="card-img-top rounded-top" 
+                     alt="Receita deliciosa">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: var(--orange);">
+                        {{ ingredient }}
+                    </h5>
+                    <p class="card-text text-muted">
+                        Uma receita saborosa com {{ ingredient }} que vai encantar o seu paladar.
+                    </p>
+                    <a href="#" class="custom-btn">Ver Receita</a>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ol>
-    <hr>
-<br>
-<form action="{{ url_for('recipes') }}" method="POST">
-        <label for="recipe">Nome da receita:</label>
-        <input type="text" name="recipe" class="form-control w-50">
-        <input type="submit" value="Entrar" class="btn btn-success">
-    </form>
-    <hr>
+    </div>
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="custom-card">
+            <h4 class="text-center" style="color: var(--orange); font-weight: 600;">Adicionar uma receita aos destaques</h4>
+            <form action="{{ url_for('recipes') }}" method="POST" class="mt-3">
+                <div class="mb-3">
+                    <input type="text" name="recipe" class="form-control custom-input" placeholder="Nome da Receita">
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="custom-btn">Salvar Receita</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
