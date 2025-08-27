@@ -3,16 +3,19 @@
 <div class="d-flex justify-content-center align-items-center flex-column mt-5">
     <!-- Card de Cadastro -->
     <div class="custom-card">
-        <h2 class="text-center mb-4">Adicionar Nova Receita</h2>
+        <h2 class="text-center mb-4">Adicionar nova receita</h2>
         <form action="{{ url_for('newRecipe') }}" method="POST">
             <div class="mb-3">
                 <input type="text" class="form-control custom-input" id="name" name="name" placeholder="Nome da Receita" required>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control custom-input" id="ingredients" name="ingredients" placeholder="Ingredientes" required>
+                <input type="text" class="form-control custom-input" id="time" name="time" placeholder="Tempo de preparo" required>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control custom-input" id="nacionality" name="nacionality" placeholder="Nacionalidade" required>
+                <input type="text" class="form-control custom-input" id="difficulty" name="difficulty" placeholder="Dificuldade" required>
+            </div>
+                        <div class="mb-3">
+                <input type="text" class="form-control custom-input" id="category" name="category" placeholder="Categoria" required>
             </div>
             <button type="submit" class="custom-btn w-100">Salvar Receita</button>
         </form>
@@ -20,21 +23,23 @@
 
     <!-- Card da Tabela -->
     <div class="custom-card mt-5 w-75">
-        <h2 class="text-center mb-4">Receitas Cadastradas</h2>
+        <h2 class="text-center mb-4">Receitas cadastradas</h2>
         <table class="table table-striped table-hover text-center align-middle">
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
-                    <th scope="col">Ingredientes</th>
-                    <th scope="col">Nacionalidade</th>
+                    <th scope="col">Tempo de preparo</th>
+                    <th scope="col">Dificuldade</th>
+                    <th scope="col">Categoria</th>
                 </tr>
             </thead>
             <tbody>
                 {% for recipe in recipeList %}
                 <tr>
                     <td>{{recipe.Nome}}</td>
-                    <td>{{recipe.Ingredientes}}</td>
-                    <td>{{recipe.Nacionalidade}}</td>
+                    <td>{{recipe.Tempo}}</td>
+                    <td>{{recipe.Dificuldade}}</td>
+                    <td>{{recipe.Categoria}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
