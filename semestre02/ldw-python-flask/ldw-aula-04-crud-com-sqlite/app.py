@@ -15,7 +15,7 @@ routes.init_app(app)
 dir = os.path.abspath(os.path.dirname(__file__))
 
 # criando o arquivo do banco 
-app.config['SQlALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(dir, 'models/games.sqlite3')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(dir, 'models/games.sqlite3')
 
 # se for executado diretamente peloo interpretador 
 # camada de segurança; se eu importar o app em outro arquivo, não vai rodar o servidor;
