@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="row g-4">
+        {% for livro in livrosList %}
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm" style="width: 16rem;">
+                <img src="{{ url_for('static', filename='images/placeholder.png') }}" class="card-img-top" alt="Capa do livro">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ livro.title }}</h5>
+                    <p class="card-text">Autor: {{ livro.author_name[0] }}</p>
+                    <p class="card-text">Ano de Publicação: {{ livro.first_publish_year }}</p>
+                    <a href="{{ url_for('apilivros', title=livro.title) }}" class="custom-btn">+ Info</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

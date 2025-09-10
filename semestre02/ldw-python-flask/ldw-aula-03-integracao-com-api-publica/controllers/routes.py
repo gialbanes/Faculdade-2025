@@ -71,4 +71,6 @@ def init_app(app):
                 return f'Game com a ID {id} não encontrado.'
         else:
             return render_template('apigames.html', gamesList=gamesList)
+        
+    
 
