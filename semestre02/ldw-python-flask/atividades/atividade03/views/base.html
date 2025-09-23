@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' )}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Estante de Livros</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar" style="background-color: #4CAF50;">
+    <div class="container-fluid">
+        <a class="navbar-brand me-auto" href="#">Minha Estante</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('newBook') }}">Cadastrar Livro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('books') }}">Estante</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('apilivros') }}">API</a>
+                </li>
+            </ul>
+        </div> 
+      </div>
+</nav>
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <h3 class="mb-3">Livros populares</h3>
+    <div class="row mb-5">
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/ficcao.png') }}" class="card-img-top" alt="Livro de Ficção">
+                <div class="card-body text-center">
+                    <p class="card-text">Ficção</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/placeholder.png') }}" class="card-img-top" alt="Livro de Ciência">
+                <div class="card-body text-center">
+                    <p class="card-text">Ciência</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/historia.png') }}" class="card-img-top" alt="Livro de História">
+                <div class="card-body text-center">
+                    <p class="card-text">História</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/biografia.png') }}" class="card-img-top" alt="Livro de Biografias">
+                <div class="card-body text-center">
+                    <p class="card-text">Biografias</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<footer>
+    <p style="text-align: center;">Todos os direitos reservados &reg;</p>
+</footer>
+</body>
+</html>
