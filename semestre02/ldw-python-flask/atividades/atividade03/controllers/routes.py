@@ -1,6 +1,7 @@
 import urllib.request
 import json
 from flask import Flask, render_template, request, redirect, url_for
+from models.database import db, Book
 
 def init_app(app):
     # Usaremos listas para simular o banco de dados de livros
@@ -38,6 +39,37 @@ def init_app(app):
                 
         return render_template('newBook.html', bookList=book_list)
 
+    @app.route("/books/estoque", methods=['GET', 'POST'])
+    @app.route("/books/estoque/delete/<int:id>")
+    def booksEstoque(id=None):
+        if id:
+            book = Book.query.get(id)
+            db.session.delete(book)
+            db.session.commit()
+            return redirect(url_for('booksEstoque'))
+        
+        if request.method == 'POST':
+            newbook = Book(request.form['titulo'], request.form['autor'], request.form['ano_publicacao'], request.form['assunto'])
+            db.session.add(newbook)
+            db.session.commit()
+            return redirect(url_for('booksEstoque'))
+        else:
+            page = request.args.get('page', 1, type=int)
+            per_page = 3
+            books_page = Book.query.paginate(page=page, per_page=per_page)
+            return render_template('booksestoque.html', booksestoque=books_page)
+    
+    @app.route("/books/edit/<int:id>", methods=['GET', 'POST'])
+    def bookEdit(id):
+        b = Book.query.get(id)
+        if request.method == 'POST':
+            b.titulo = request.form['titulo']
+            b.autor = request.form['autor']
+            b.ano_publicacao = request.form['ano_publicacao']
+            b.assunto = request.form['assunto']
+            db.session.commit()
+            return redirect(url_for('booksEstoque'))
+    
     @app.route("/apilivros", methods=['GET'])
     @app.route("/apilivros/<string:title>", methods=['GET'])
     def apilivros(title=None):

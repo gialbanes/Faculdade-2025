@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from controllers import routes
 import pymysql
+from models.database import db
 
 app = Flask(__name__, template_folder="views")
 
