@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Controle de estoque - Detalhes de Livros (BookDetail)</h2><br>
+<details>
+    <summary>[ Cadastrar novo detalhe de livro ]</summary>
+    <div class="col-md-6">
+        <form action="{{url_for('bookDetailsEstoque')}}" method="POST">
+            <input type="text" name="isbn" placeholder="ISBN (Identificador Único)" class="form-control" required/>
+            <textarea name="resumo_longo" placeholder="Resumo longo do livro" class="form-control" rows="4" required></textarea>
+            
+            <input type="submit" value="Cadastrar Detalhe" class="btn btn-success mt-2"/>
+            <input type="reset" value="Limpar" class="btn btn-danger mt-2">
+        </form>
+    </div>
+</details>
+<hr>
+<h5>Detalhes de Livros (BookDetail) em estoque:</h5>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th style="width: 50px;"></th>
+            <th>ISBN:</th>
+            <th>Resumo Longo:</th>
+            <th style="text-align: center;" colspan="2">Ação:</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book_detail in book_details_estoque.items %}
+        <tr>
+            <td style="text-align: center;"><img src="{{url_for('static', filename='images/book.png')}}" alt="Detalhe de Livro" width="40px"></td>
+            <td>{{book_detail.isbn}}</td>
+            <td>{{book_detail.resumo_longo | truncate(150)}}</td>
+            <td style="text-align: center; width: 130px;"><a class="btn btn-warning" href="{{url_for('bookDetailEdit', id=book_detail.id)}}">Editar</a></td>
+            <td style="text-align: center; width: 130px;"><a class="btn btn-danger" href="{{url_for('bookDetailsEstoque', id=book_detail.id)}}" onclick="return confirm('Deseja mesmo excluir o detalhe de livro com ISBN {{book_detail.isbn}}?')">Excluir</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p style="text-align: center;">
+    {% if book_details_estoque.has_prev %}
+    <a href="{{url_for('bookDetailsEstoque', page=book_details_estoque.prev_num)}}"><< Anterior>></a>
+    {% endif %}
+    {% if book_details_estoque.has_next %}
+        <a href="{{url_for('bookDetailsEstoque', page=book_details_estoque.next_num)}}">Próximo >>>></a>
+</p>
+{% endif %}
+{% endblock content %}
