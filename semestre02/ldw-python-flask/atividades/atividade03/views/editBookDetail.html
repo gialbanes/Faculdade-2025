@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6" m-auto>
+    <h3 style="text-align: center;">Editar Detalhe do Livro:</h3><br>
+    <form action="{{url_for('bookDetailEdit', id=book_detail.id)}}" method="POST"> 
+        <input type="text" name="isbn" class="form-control" value="{{book_detail.isbn}}" required/>
+        <textarea name="resumo_longo" class="form-control mt-3" rows="6" required>{{book_detail.resumo_longo}}</textarea>
+        
+        <a href="{{url_for('bookDetailEdit', id=book_detail.id)}}" onclick="return confirm('Confirma as alterações?')"><input type="submit" value="Alterar" class="btn btn-warning mt-3"></a>
+        <a href="{{url_for('bookDetailsEstoque')}}"><input type="button" value="Cancelar" class="btn btn-danger mt-3"></a>
+    </form>
+</div>
+{% endblock content %}

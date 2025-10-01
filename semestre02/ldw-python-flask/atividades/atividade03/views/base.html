@@ -19,16 +19,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('newBook') }}">Cadastrar Livro</a>
+                    <a class="nav-link" href="{{ url_for('home') }}">Início</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('books') }}">Estante</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('apilivros') }}">API</a>
+                    <a class="nav-link" href="{{ url_for('cadbooks') }}">Novo livro</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('booksEstoque') }}">Estoque - Livros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('bookDetailsEstoque') }}">Estoque - Detalhes do livro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('apilivros') }}">API</a>
                 </li>
             </ul>
         </div> 
