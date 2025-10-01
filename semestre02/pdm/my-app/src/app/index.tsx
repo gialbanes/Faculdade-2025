@@ -23,7 +23,11 @@ export default function Index() {
                 }
                 }/> */}
                 
-                <Card title="Primeiro Card" body="Corpo do Card" href={"/buttons"}></Card>
+                <Card title="Card simples" body="Corpo do Card" href={"/buttons"}></Card>
+                <Card title="FlatList - Exemplo" body="Corpo do segundo card" href={"/flatlist-example"}></Card>
+                <Card title="FlatList - Fetch" body="Corpo do terceiro card" href={"/flatlist-fetch"}></Card>
+                <Card title="FlashList" body="Corpo do quarto card" href={"/flashlist"}></Card>
+                <Card title="Inputs" body="Corpo dos inputs" href={"/inputs"}></Card>
 
             </View>
         </ScrollView>
