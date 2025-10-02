@@ -1,47 +1,106 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Controle de estoque - Detalhes de Livros (BookDetail)</h2><br>
-<details>
-    <summary>[ Cadastrar novo detalhe de livro ]</summary>
-    <div class="col-md-6">
-        <form action="{{url_for('bookDetailsEstoque')}}" method="POST">
-            <input type="text" name="isbn" placeholder="ISBN (Identificador Único)" class="form-control" required/>
-            <textarea name="resumo_longo" placeholder="Resumo longo do livro" class="form-control" rows="4" required></textarea>
-            
-            <input type="submit" value="Cadastrar Detalhe" class="btn btn-success mt-2"/>
-            <input type="reset" value="Limpar" class="btn btn-danger mt-2">
-        </form>
+
+<div class="container my-5 pt-5">
+    <h2 class="text-center mb-5" style="font-weight: 700;">
+        Controle de detalhes de livros 
+    </h2>
+
+    <!-- Seção de Cadastro de Detalhe de Livro -->
+    <details class="mb-5 p-4 rounded shadow-lg" style="background-color: #f8f9fa;">
+        <!-- Estilização da Summary (para parecer um botão/toggle) -->
+        <summary class="h5" style="cursor: pointer; color: #0d6efd;">
+            [ Cadastrar novo detalhe de livro ]
+        </summary>
+
+        <div class="row justify-content-center pt-4">
+            <div class="col-lg-8 col-md-10">
+                <form action="{{ url_for('bookDetailsEstoque') }}" method="POST">
+                    <h5 class="mb-4" style="font-weight: 600;">Dados do Detalhe</h5>
+
+                    <div class="mb-3">
+                        <label for="isbn" class="form-label">ISBN (Identificador Único):</label>
+                        <input type="text" id="isbn" name="isbn" placeholder="Ex: 978-8575225091" class="form-control" required/>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="resumo_longo" class="form-label">Resumo Longo:</label>
+                        <textarea id="resumo_longo" name="resumo_longo" placeholder="Resumo longo do livro" class="form-control" rows="4" required></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <!-- Botão Cadastrar (Estilizado com o padrão Laranja) -->
+                        <input type="submit" value="Cadastrar Detalhe" class="btn text-white" 
+                               style="background-color: #fd7e14; border-color: #fd7e14; font-weight: 600;"/>
+                        <input type="reset" value="Limpar" class="btn btn-secondary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </details>
+
+    <hr class="my-5">
+
+    <!-- Seção de Detalhes de Livros em Estoque (Tabela) -->
+    <h4 class="text-center mb-4" style="font-weight: 700;">
+        Detalhes de Livros (BookDetail) em estoque:
+    </h4>
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="table-responsive shadow-lg rounded">
+                <table class="table table-striped table-hover caption-top">
+                    <!-- CABEÇALHO DA TABELA LARANJA -->
+                    <thead style="background-color: #fd7e14; color: white;">
+                        <tr>
+                            <th scope="col" style="width: 50px;">Icone</th>
+                            <th scope="col" style="width: 15%;">ISBN:</th>
+                            <th scope="col">Resumo Longo:</th>
+                            <th scope="col" class="text-center" colspan="2" style="width: 260px;">Ação:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book_detail in book_details_estoque.items %}
+                        <tr>
+                            <td class="text-center align-middle">
+                                <img src="{{url_for('static', filename='images/book.png')}}" alt="Detalhe de Livro" width="30px" class="rounded">
+                            </td>
+                            <td class="align-middle">{{ book_detail.isbn }}</td>
+                            <td class="align-middle">{{ book_detail.resumo_longo | truncate(150) }}</td>
+                            
+                            <td class="text-center align-middle" style="width: 130px;">
+                                <a class="btn btn-sm btn-warning w-100" href="{{ url_for('bookDetailEdit', id=book_detail.id) }}">Editar</a>
+                            </td>
+                            <td class="text-center align-middle" style="width: 130px;">
+                                <!-- Link de Exclusão Direta (Recomendado modal de confirmação em produção) -->
+                                <a class="btn btn-sm btn-danger w-100" href="{{ url_for('bookDetailsEstoque', id=book_detail.id) }}">Excluir</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</details>
-<hr>
-<h5>Detalhes de Livros (BookDetail) em estoque:</h5>
-<table class="table table-bordered table-hover">
-    <thead class="table-dark">
-        <tr>
-            <th style="width: 50px;"></th>
-            <th>ISBN:</th>
-            <th>Resumo Longo:</th>
-            <th style="text-align: center;" colspan="2">Ação:</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for book_detail in book_details_estoque.items %}
-        <tr>
-            <td style="text-align: center;"><img src="{{url_for('static', filename='images/book.png')}}" alt="Detalhe de Livro" width="40px"></td>
-            <td>{{book_detail.isbn}}</td>
-            <td>{{book_detail.resumo_longo | truncate(150)}}</td>
-            <td style="text-align: center; width: 130px;"><a class="btn btn-warning" href="{{url_for('bookDetailEdit', id=book_detail.id)}}">Editar</a></td>
-            <td style="text-align: center; width: 130px;"><a class="btn btn-danger" href="{{url_for('bookDetailsEstoque', id=book_detail.id)}}" onclick="return confirm('Deseja mesmo excluir o detalhe de livro com ISBN {{book_detail.isbn}}?')">Excluir</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<p style="text-align: center;">
-    {% if book_details_estoque.has_prev %}
-    <a href="{{url_for('bookDetailsEstoque', page=book_details_estoque.prev_num)}}"><< Anterior>></a>
-    {% endif %}
-    {% if book_details_estoque.has_next %}
-        <a href="{{url_for('bookDetailsEstoque', page=book_details_estoque.next_num)}}">Próximo >>>></a>
-</p>
-{% endif %}
+
+    <!-- Paginação -->
+    <div class="text-center mt-4">
+        {% if book_details_estoque.has_prev %}
+        <a class="btn btn-outline-primary mx-1" href="{{ url_for('bookDetailsEstoque', page=book_details_estoque.prev_num) }}">
+            &lt;&lt; Anterior
+        </a>
+        {% endif %}
+
+        {% if book_details_estoque.pages > 1 %}
+            <span class="px-3 text-muted">Página {{ book_details_estoque.page }} de {{ book_details_estoque.pages }}</span>
+        {% endif %}
+        
+        {% if book_details_estoque.has_next %}
+        <a class="btn btn-outline-primary mx-1" href="{{ url_for('bookDetailsEstoque', page=book_details_estoque.next_num) }}">
+            Próximo &gt;&gt;
+        </a>
+        {% endif %}
+    </div>
+
+</div>
 {% endblock content %}
