@@ -1,13 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="col-md-6" m-auto>
-    <h3 style="text-align: center;">Editar Detalhe do Livro:</h3><br>
-    <form action="{{url_for('bookDetailEdit', id=book_detail.id)}}" method="POST"> 
-        <input type="text" name="isbn" class="form-control" value="{{book_detail.isbn}}" required/>
-        <textarea name="resumo_longo" class="form-control mt-3" rows="6" required>{{book_detail.resumo_longo}}</textarea>
-        
-        <a href="{{url_for('bookDetailEdit', id=book_detail.id)}}" onclick="return confirm('Confirma as alterações?')"><input type="submit" value="Alterar" class="btn btn-warning mt-3"></a>
-        <a href="{{url_for('bookDetailsEstoque')}}"><input type="button" value="Cancelar" class="btn btn-danger mt-3"></a>
-    </form>
+
+<div class="container my-5 pt-5">
+    
+    <h2 class="text-center mb-5" style="font-weight: 700;">
+        Editar Detalhe do Livro
+    </h2>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            
+            <div class="p-4 rounded shadow-lg" style="background-color: #f8f9fa;">
+                
+                <h5 class="mb-4" style="font-weight: 600;">Dados do Detalhe</h5>
+                
+                <form action="{{ url_for('bookDetailEdit', id=book_detail.id) }}" method="POST"> 
+                    
+                    <div class="mb-3">
+                        <label for="isbn" class="form-label">ISBN (Identificador Único):</label>
+                        <input type="text" id="isbn" name="isbn" 
+                               value="{{ book_detail.isbn }}" 
+                               placeholder="Ex: 978-8575225091" 
+                               class="form-control" required/>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="resumo_longo" class="form-label">Resumo:</label>
+                        <textarea id="resumo_longo" name="resumo_longo" 
+                                  placeholder="Resumo do livro" 
+                                  class="form-control" rows="6" required>{{ book_detail.resumo_longo }}</textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        
+                        <input type="submit" value="Salvar Alterações" 
+                               class="btn text-white" 
+                               style="background-color: #fd7e14; border-color: #fd7e14; font-weight: 600;"
+                               onclick="return confirm('Confirma as alterações?')"/> 
+                        
+                        <a href="{{ url_for('bookDetailsEstoque') }}" class="btn btn-secondary">
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

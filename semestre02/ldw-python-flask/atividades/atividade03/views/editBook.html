@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="col-md-6 m-auto">
-    <h3 style="text-align: center;">Editar Livro</h3><br>
+    <h3 style="text-align: center;">Editar livro</h3><br>
     <form action="{{url_for('bookEdit', id=b.id)}}" method="POST">
         <input type="text" name="titulo" class="form-control mb-3" placeholder="Título" value="{{b.titulo}}" required>
         <input type="text" name="autor" class="form-control mb-3" placeholder="Autor" value="{{b.autor}}" required>

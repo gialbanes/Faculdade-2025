@@ -6,9 +6,7 @@
         Controle de estoque de livros
     </h2>
 
-    <!-- Seção de Cadastro de Livro -->
     <details class="mb-5 p-4 rounded shadow-lg" style="background-color: #f8f9fa;">
-        <!-- Estilização da Summary (para parecer um botão/toggle) -->
         <summary class="h5" style="cursor: pointer; color: #0d6efd;">
             [ Cadastrar novo livro ]
         </summary>
@@ -18,7 +16,6 @@
                 <form action="{{ url_for('booksEstoque') }}" method="POST">
                     <h5 class="mb-4" style="font-weight: 600;">Dados Principais</h5>
 
-                    <!-- Campos do Livro -->
                     <input type="text" name="titulo" placeholder="Título" class="form-control mb-3" required/>
                     <input type="text" name="autor" placeholder="Autor" class="form-control mb-3" required/>
                     <input type="number" name="ano_publicacao" placeholder="Ano de publicação" class="form-control mb-3" required/>
@@ -26,7 +23,7 @@
 
                     <hr class="my-4">
                     
-                    <h5 class="mb-3" style="font-weight: 600;">Detalhes Adicionais (BookDetail Opcional)</h5>
+                    <h5 class="mb-3" style="font-weight: 600;">Detalhes adicionais</h5>
                     <select name="book_detail_id" class="form-select mb-4" required>
                         <option value="" selected disabled>Selecione um detalhe de livro (ISBN/Resumo)...</option>
                         {% for detail in book_details %}
@@ -35,7 +32,6 @@
                     </select>
 
                     <div class="d-flex justify-content-end gap-2">
-                        <!-- Botão Cadastrar (Estilizado com o padrão Laranja) -->
                         <input type="submit" value="Cadastrar" class="btn text-white" 
                                style="background-color: #fd7e14; border-color: #fd7e14; font-weight: 600;"/>
                         <input type="reset" value="Limpar" class="btn btn-secondary">
@@ -47,7 +43,6 @@
 
     <hr class="my-5">
 
-    <!-- Seção de Livros em Estoque -->
     <h4 class="text-center mb-4" style="font-weight: 700;">
         Livros em estoque:
     </h4>
@@ -56,7 +51,6 @@
         <div class="col-12">
             <div class="table-responsive shadow-lg rounded">
                 <table class="table table-striped table-hover caption-top">
-                    <!-- CABEÇALHO DA TABELA LARANJA -->
                     <thead style="background-color: #fd7e14; color: white;">
                         <tr>
                             <th scope="col" style="width: 50px;">Capa</th>
@@ -73,7 +67,6 @@
                         {% for b in booksestoque.items %}
                         <tr>
                             <td class="text-center align-middle">
-                                <!-- Ícone de Livro (Pode ser melhorado com um SVG/Emoji ou placeholder) -->
                                 <img src="{{ url_for('static', filename='images/book.png') }}" alt="Produto" width="30px" class="rounded"/>
                             </td>
                             <td class="align-middle">{{ b.titulo }}</td>
@@ -87,8 +80,6 @@
                                 <a class="btn btn-sm btn-warning w-100" href="{{ url_for('bookEdit', id=b.id) }}">Editar Detalhes</a>
                             </td>
                             <td class="text-center align-middle" style="width: 130px;">
-                                <!-- ATENÇÃO: Remoção do confirm() para evitar problemas em iframe. 
-                                     Isso fará a exclusão direta. Implemente um modal para confirmação em produção. -->
                                 <a class="btn btn-sm btn-danger w-100" href="{{ url_for('booksEstoque', id=b.id) }}">Excluir</a>
                             </td>
                         </tr>
@@ -99,15 +90,13 @@
         </div>
     </div>
 
-    <!-- Paginação -->
     <div class="text-center mt-4">
         {% if booksestoque.has_prev %}
         <a class="btn btn-outline-primary mx-1" href="{{ url_for('booksEstoque', page=booksestoque.prev_num) }}">
             &lt;&lt; Anterior
         </a>
         {% endif %}
-        
-        <!-- Mostra o número da página atual se houver mais de uma página -->
+
         {% if booksestoque.pages > 1 %}
             <span class="px-3 text-muted">Página {{ booksestoque.page }} de {{ booksestoque.pages }}</span>
         {% endif %}

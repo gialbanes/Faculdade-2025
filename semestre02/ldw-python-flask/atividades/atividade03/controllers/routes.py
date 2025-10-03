@@ -36,8 +36,6 @@ def init_app(app):
     def booksEstoque(id=None):
         if id:
             book = Book.query.get(id)
-            if book.detail:
-                db.session.delete(book.detail)
             
             db.session.delete(book)
             db.session.commit()
