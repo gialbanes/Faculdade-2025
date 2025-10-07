@@ -12,7 +12,19 @@ gamelist = [{'Título': 'CS-GO', 'Ano': 2012, 'Categoria': 'FPS Online'}]
 
 
 def init_app(app):
-    @app.route('/')
+    # Função de middleware para verificar a autenticação do usuário 
+    @app.before_request 
+    def check_auth(): 
+        routes = ['login', 'caduser', 'home'] # rotas que não precisam de autenticação
+        if request.endpoint in routes or request.path.startswith('/static/'):
+            return 
+        
+        # se a rota não estiver na lista, verifica se o usuário está autenticado 
+        if 'user_id' not in session:
+            return redirect(url_for('login'))
+        
+            
+    @app.route('/') # decorator 
     def home():
         return render_template('index.html')
 
@@ -152,6 +164,12 @@ def init_app(app):
                 flash('Falha no login. Verifique o nome de usuário e senha.', 'danger')
                 return redirect(url_for('login'))
         return render_template('login.html')
+    
+    @app.route("/logout", methods=['GET', 'POST'])
+    def logout():
+        session.clear()
+        flash('Você foi desconectado!', 'danger')
+        return redirect(url_for('home'))
     
     @app.route("/caduser", methods=['GET', 'POST'])
     def caduser():
