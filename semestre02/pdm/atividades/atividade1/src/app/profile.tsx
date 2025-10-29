@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import { Alert, Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Linking, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Profile() {
     const handleOpenGitHub = async () => {
@@ -14,19 +14,36 @@ export default function Profile() {
         }
     };
 
+    const handlePressableAction = () => {
+        Alert.alert("Pressable", "Você clicou na imagem usando Pressable!");
+    };
+
+    const handleTouchableAction = () => {
+        Alert.alert("TouchableOpacity", "Você clicou no nome usando TouchableOpacity!");
+    };
+
     return(
         <>
         <View style={styles.container}>
-            <TouchableOpacity 
-                activeOpacity={0.8} 
-                style={styles.profileImage}
+            <Pressable 
+                style={({ pressed }) => [
+                    styles.profileImage,
+                    { opacity: pressed ? 0.8 : 1 }
+                ]}
+                onPress={handlePressableAction}
             >
                 <Image
                     source={{ uri: "https://github.com/gialbanes.png"}}
                     style={styles.profileImage}
                 />
+            </Pressable>
+            
+            <TouchableOpacity 
+                activeOpacity={0.7}
+                onPress={handleTouchableAction}
+            >
+                <Text style={styles.title}>Giovana Albanês</Text>
             </TouchableOpacity>
-            <Text style={styles.title}>Giovana Albanês</Text>
 
             <View style={styles.footer}>
                 <Button title="Ver perfil no GitHub" onPress={handleOpenGitHub}/>
