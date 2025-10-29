@@ -27,7 +27,7 @@ export default function Profile() {
         <View style={styles.container}>
             <Pressable 
                 style={({ pressed }) => [
-                    styles.profileImage,
+                    styles.profileImageContainer,
                     { opacity: pressed ? 0.8 : 1 }
                 ]}
                 onPress={handlePressableAction}
@@ -58,48 +58,39 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ffffff",
-    padding: 20,
-    gap: 16,
+    backgroundColor: "#f5f7fa",
+    padding: 24,
+    gap: 20,
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 24,
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#2c3e50",
+    marginBottom: 8,
+    textAlign: "center",
+    letterSpacing: 0.5,
   },
   footer: {
     width: "100%",
-    gap: 12,
-    paddingBottom: 40,
+    marginTop: 32,
+    paddingHorizontal: 16,
+  },
+  profileImageContainer: {
+    borderRadius: 70,
+    borderWidth: 4,
+    borderColor: "#007bff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
   },
   profileImage: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-  },
-  profileInfo: {
-    width: "100%",
-    marginBottom: 40,
-  },
-  infoItem: {
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-  infoLabel: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#666666",
-    marginBottom: 5,
-  },
-  infoValue: {
-    fontSize: 18,
-    fontWeight: "500",
-    color: "#333333",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    backgroundColor: "#f8f8f8",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
+    width: 140,
+    height: 140,
+    borderRadius: 70,
   },
 });
