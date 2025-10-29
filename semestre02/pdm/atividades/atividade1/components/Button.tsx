@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  Animated,
-  Pressable,
-  PressableProps,
-  StyleSheet,
-  Text,
-  View,
+    Animated,
+    Pressable,
+    PressableProps,
+    StyleSheet,
+    Text,
+    View,
 } from "react-native";
 
 type Variant = "primary" | "secondary" | "info";
@@ -16,11 +16,11 @@ type Props = PressableProps & {
 };
 
 export default function Button({ title, variant = "primary", ...rest }: Props) {
-  const [pressAnim] = useState(new Animated.Value(0));
+  const [pressAnim] = useState(new Animated.Value(1));
 
   const handlePressIn = () => {
     Animated.timing(pressAnim, {
-      toValue: 1,
+      toValue: 0.95,
       duration: 100,
       useNativeDriver: true,
     }).start();
@@ -28,28 +28,12 @@ export default function Button({ title, variant = "primary", ...rest }: Props) {
 
   const handlePressOut = () => {
     Animated.timing(pressAnim, {
-      toValue: 0,
+      toValue: 1,
       duration: 100,
       useNativeDriver: true,
     }).start();
   };
 
-  const translateY = pressAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 4],
-  });
-
-  const shadowOpacity = pressAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-  });
-
-  const buttonShadowVariantStyle =
-    variant === "secondary"
-      ? styles.secondaryButtonShadow
-      : variant === "info"
-      ? styles.infoButtonShadow
-      : styles.primaryButtonShadow;
   const buttonVariantStyle =
     variant === "secondary"
       ? styles.secondaryButton
@@ -65,93 +49,68 @@ export default function Button({ title, variant = "primary", ...rest }: Props) {
 
   return (
     <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut} {...rest}>
-      <View style={styles.buttonWrapper}>
-        <Animated.View
-          style={[
-            styles.buttonShadow,
-            buttonShadowVariantStyle,
-            {
-              opacity: shadowOpacity,
-            },
-          ]}
-        />
-        <Animated.View
-          style={[
-            styles.button,
-            buttonVariantStyle,
-            {
-              transform: [{ translateY }],
-            },
-          ]}
-        >
+      <Animated.View 
+        style={[
+          styles.buttonWrapper,
+          {
+            transform: [{ scale: pressAnim }],
+          },
+        ]}
+      >
+        <View style={[styles.button, buttonVariantStyle]}>
           <Text style={[styles.buttonText, buttonTextVariantStyle]}>
             {title}
           </Text>
-        </Animated.View>
-      </View>
+        </View>
+      </Animated.View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   buttonWrapper: {
-    position: "relative",
     width: "100%",
-    height: 56,
-  },
-  buttonShadow: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 56,
-    borderRadius: 16,
-  },
-  primaryButtonShadow: {
-    backgroundColor: "#926D00",
-  },
-  secondaryButtonShadow: {
-    backgroundColor: "#a3a3a3",
-  },
-  infoButtonShadow: {
-    backgroundColor: "#1565C0",
+    height: 50,
+    borderRadius: 25,
   },
   button: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 52,
-    borderRadius: 16,
+    width: "100%",
+    height: 50,
+    borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 2,
-    borderBottomWidth: 0,
+    paddingHorizontal: 20,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   primaryButton: {
-    backgroundColor: "#F7c325",
-    borderColor: "#926D00",
+    backgroundColor: "#007bff",
   },
   secondaryButton: {
-    backgroundColor: "#f4f4f4",
-    borderColor: "#bdbdbd",
+    backgroundColor: "#6c757d",
   },
   infoButton: {
-    backgroundColor: "#2196F3",
-    borderColor: "#1565C0",
+    backgroundColor: "#17a2b8",
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: "bold",
-    letterSpacing: 1,
+    fontWeight: "600",
+    textAlign: "center",
+    color: "#ffffff",
   },
   primaryButtonText: {
-    color: "#5C4400",
+    color: "#ffffff",
   },
   secondaryButtonText: {
-    color: "#4a4a4a",
+    color: "#ffffff",
   },
   infoButtonText: {
-    color: "#FFFFFF",
+    color: "#ffffff",
   },
 });
