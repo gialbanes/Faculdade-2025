@@ -1,6 +1,13 @@
+import { useRouter } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomePage() {
+    const router = useRouter();
+
+    const callProfile = () => {
+        router.push('/profile/profile');
+    };
+
     return(
         <View style={styles.container}>
             <View style={styles.header}>
@@ -16,7 +23,7 @@ export default function HomePage() {
                     <Text style={styles.cardDescription}>
                         Crie seu perfil profissional e mostre suas habilidades para o mundo
                     </Text>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={callProfile}>
                         <Text style={styles.buttonText}>Criar Perfil</Text>
                     </TouchableOpacity>
                 </View>
