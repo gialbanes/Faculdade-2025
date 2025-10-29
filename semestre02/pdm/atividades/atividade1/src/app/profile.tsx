@@ -17,10 +17,15 @@ export default function Profile() {
     return(
         <>
         <View style={styles.container}>
+            <TouchableOpacity 
+                activeOpacity={0.8} 
+                style={styles.profileImage}
+            >
                 <Image
                     source={{ uri: "https://github.com/gialbanes.png"}}
                     style={styles.profileImage}
                 />
+            </TouchableOpacity>
             <Text style={styles.title}>Giovana Albanês</Text>
 
             <View style={styles.footer}>
