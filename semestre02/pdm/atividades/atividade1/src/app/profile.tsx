@@ -22,6 +22,10 @@ export default function Profile() {
                     style={styles.profileImage}
                 />
             <Text style={styles.title}>Giovana Albanês</Text>
+
+            <View style={styles.footer}>
+                <Button title="Ver perfil no GitHub" onPress={handleOpenGitHub}/>
+            </View>
         </View>
         </>
     )
