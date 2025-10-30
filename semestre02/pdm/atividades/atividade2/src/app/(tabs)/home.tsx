@@ -75,11 +75,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     lineHeight: 32,
   },
-  subtitle: {
-    fontSize: 16,
-    color: "#e1f5fe",
-    lineHeight: 22,
-  },
   content: {
     flex: 1,
     justifyContent: "center",
@@ -125,20 +120,8 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 6,
   },
-  buttonSecondary: {
-    backgroundColor: "transparent",
-    borderWidth: 2,
-    borderColor: "#0077b5",
-    shadowColor: "transparent",
-    elevation: 0,
-  },
   buttonText: {
     color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  buttonTextSecondary: {
-    color: "#0077b5",
     fontSize: 16,
     fontWeight: "600",
   },
