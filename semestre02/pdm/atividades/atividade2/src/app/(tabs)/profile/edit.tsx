@@ -1,11 +1,9 @@
 import Button from "@/components/Button";
 import { ProfileStorage } from "@/services/profileStorage";
 import { Profile } from "@/types/profile";
-import * as DocumentPicker from "expo-document-picker";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
 import {
-    Image,
     StyleSheet,
     Text,
     TextInput,
@@ -14,8 +12,10 @@ import {
 
 export default function EditProfileModal() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [fileUri, setFileUri] = useState<string | null>(null);
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const [institution, setInstitution] = useState("");
+  const [course, setCourse] = useState("");
 
   useFocusEffect(
     useCallback(() => {
@@ -24,8 +24,10 @@ export default function EditProfileModal() {
 
         if (savedProfile) {
           setName(savedProfile.name);
-          setEmail(savedProfile.email);
-          setFileUri(savedProfile.fileUri || null);
+          setLastName(savedProfile.lastName || "");
+          setAge(savedProfile.age?.toString() || "");
+          setInstitution(savedProfile.institution || "");
+          setCourse(savedProfile.course || "");
         }
       }
 
@@ -33,24 +35,14 @@ export default function EditProfileModal() {
     }, [])
   );
 
-  const handlePickDocument = async () => {
-    const result = await DocumentPicker.getDocumentAsync({
-      type: "image/*",
-    });
-
-    if (!result.canceled && result.assets && result.assets.length > 0) {
-      const uri = result.assets[0].uri;
-      setFileUri(uri);
-    } else {
-      console.warn("Nenhuma imagem selecionada");
-    }
-  };
 
   const handleSave = async () => {
     const updatedProfile: Profile = {
       name: name.trim(),
-      email: email.trim(),
-      fileUri: fileUri || undefined,
+      lastName: lastName.trim() || undefined,
+      age: age ? parseInt(age) : undefined,
+      institution: institution.trim() || undefined,
+      course: course.trim() || undefined,
     };
 
     await ProfileStorage.save(updatedProfile);
@@ -67,11 +59,6 @@ export default function EditProfileModal() {
 
       {/* Informações do Perfil */}
       <View style={styles.profileInfo}>
-        {fileUri && (
-          <View style={styles.previewContainer}>
-            <Image source={{ uri: fileUri }} style={styles.preview} />
-          </View>
-        )}
 
         <View style={styles.infoItem}>
           <Text style={styles.infoLabel}>Nome:</Text>
@@ -85,25 +72,52 @@ export default function EditProfileModal() {
         </View>
 
         <View style={styles.infoItem}>
-          <Text style={styles.infoLabel}>Email:</Text>
+          <Text style={styles.infoLabel}>Sobrenome:</Text>
           <TextInput
             style={styles.textInput}
-            value={email}
-            onChangeText={setEmail}
-            placeholder="Digite seu email"
+            value={lastName}
+            onChangeText={setLastName}
+            placeholder="Digite seu sobrenome"
             placeholderTextColor="#999999"
-            keyboardType="email-address"
-            autoCapitalize="none"
+          />
+        </View>
+
+        <View style={styles.infoItem}>
+          <Text style={styles.infoLabel}>Idade:</Text>
+          <TextInput
+            style={styles.textInput}
+            value={age}
+            onChangeText={setAge}
+            placeholder="Digite sua idade"
+            placeholderTextColor="#999999"
+            keyboardType="numeric"
+          />
+        </View>
+
+        <View style={styles.infoItem}>
+          <Text style={styles.infoLabel}>Instituição:</Text>
+          <TextInput
+            style={styles.textInput}
+            value={institution}
+            onChangeText={setInstitution}
+            placeholder="Digite sua instituição"
+            placeholderTextColor="#999999"
+          />
+        </View>
+
+        <View style={styles.infoItem}>
+          <Text style={styles.infoLabel}>Curso:</Text>
+          <TextInput
+            style={styles.textInput}
+            value={course}
+            onChangeText={setCourse}
+            placeholder="Digite seu curso"
+            placeholderTextColor="#999999"
           />
         </View>
       </View>
 
       <View style={styles.footer}>
-        <Button
-          title="Selecionar imagem"
-          variant="info"
-          onPress={handlePickDocument}
-        />
         <Button title="SALVAR" onPress={handleSave} />
         <Button title="Cancelar" variant="outline" onPress={handleCancel} />
       </View>
@@ -114,121 +128,65 @@ export default function EditProfileModal() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    padding: 20,
-    gap: 16,
+    backgroundColor: "#f8f9fa",
+    paddingTop: 60,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 24,
-  },
-  footer: {
-    width: "100%",
-    gap: 12,
-    paddingBottom: 40,
-  },
-  profileImage: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    color: "#0077b5",
+    textAlign: "center",
+    marginBottom: 32,
+    paddingHorizontal: 20,
   },
   profileInfo: {
-    width: "100%",
-    marginBottom: 40,
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   infoItem: {
     marginBottom: 20,
-    paddingHorizontal: 10,
   },
   infoLabel: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "600",
-    color: "#666666",
-    marginBottom: 5,
-  },
-  infoValue: {
-    fontSize: 18,
-    fontWeight: "500",
-    color: "#333333",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    backgroundColor: "#f8f8f8",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
+    color: "#0077b5",
+    marginBottom: 8,
+    marginLeft: 4,
   },
   textInput: {
     fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
     backgroundColor: "#ffffff",
-    borderRadius: 8,
+    borderRadius: 12,
     borderWidth: 2,
-    borderColor: "#e0e0e0",
+    borderColor: "#e1f5fe",
     color: "#333333",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  previewContainer: {
-    alignItems: "center",
-    marginTop: 20,
-  },
-  preview: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-  },
-  locationContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  locationInputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+  footer: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+    paddingTop: 20,
+    gap: 16,
     backgroundColor: "#ffffff",
-    borderRadius: 8,
-    borderWidth: 2,
-    borderColor: "#e0e0e0",
-    color: "#333333",
-  },
-  locationTextInput: {
-    flex: 1,
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    paddingRight: 8, // Espaço extra para o ícone
-    color: "#333333",
-  },
-  locationIconButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  locationIconButtonDisabled: {
-    opacity: 0.5,
-  },
-  spinningIcon: {
-    transform: [{ rotate: "45deg" }],
-  },
-  locationButton: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "#2196F3",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: "#1565C0",
-  },
-  locationButtonDisabled: {
-    backgroundColor: "#cccccc",
-    borderColor: "#999999",
-  },
-  locationButtonText: {
-    fontSize: 20,
-    color: "#FFFFFF",
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 8,
   },
 });
