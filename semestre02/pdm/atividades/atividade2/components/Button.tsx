@@ -8,14 +8,13 @@ import {
   View,
 } from "react-native";
 
-type Variant = "primary" | "secondary" | "info" | "danger" | "success" | "outline";
+type Variant = "primary" | "outline";
 
 type Props = PressableProps & {
   title: string;
   variant?: Variant;
   size?: "small" | "medium" | "large";
   fullWidth?: boolean;
-  icon?: string;
 };
 
 export default function Button({ 
@@ -23,7 +22,6 @@ export default function Button({
   variant = "primary", 
   size = "medium",
   fullWidth = true,
-  icon,
   ...rest 
 }: Props) {
   const [scaleAnim] = useState(new Animated.Value(1));
@@ -61,26 +59,6 @@ export default function Button({
 
   const getVariantStyles = () => {
     switch (variant) {
-      case "secondary":
-        return {
-          button: styles.secondaryButton,
-          text: styles.secondaryButtonText,
-        };
-      case "info":
-        return {
-          button: styles.infoButton,
-          text: styles.infoButtonText,
-        };
-      case "danger":
-        return {
-          button: styles.dangerButton,
-          text: styles.dangerButtonText,
-        };
-      case "success":
-        return {
-          button: styles.successButton,
-          text: styles.successButtonText,
-        };
       case "outline":
         return {
           button: styles.outlineButton,
@@ -136,7 +114,6 @@ export default function Button({
         ]}
       >
         <View style={styles.content}>
-          {icon && <Text style={[styles.icon, variantStyles.text]}>{icon}</Text>}
           <Text style={[styles.buttonText, variantStyles.text, sizeStyles.text]}>
             {title}
           </Text>
@@ -172,10 +149,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  icon: {
-    marginRight: 8,
-    fontSize: 18,
-  },
   buttonText: {
     fontWeight: "600",
     textAlign: "center",
@@ -189,14 +162,6 @@ const styles = StyleSheet.create({
   primaryButtonText: {
     color: "#ffffff",
   },
-  secondaryButton: {
-    backgroundColor: "#f8f9fa",
-    borderWidth: 2,
-    borderColor: "#6c757d",
-  },
-  secondaryButtonText: {
-    color: "#6c757d",
-  },
   outlineButton: {
     backgroundColor: "transparent",
     borderWidth: 2,
@@ -204,30 +169,6 @@ const styles = StyleSheet.create({
   },
   outlineButtonText: {
     color: "#dc3545",
-  },
-  infoButton: {
-    backgroundColor: "#17a2b8",
-    borderWidth: 2,
-    borderColor: "#138496",
-  },
-  infoButtonText: {
-    color: "#ffffff",
-  },
-  dangerButton: {
-    backgroundColor: "#dc3545",
-    borderWidth: 2,
-    borderColor: "#c82333",
-  },
-  dangerButtonText: {
-    color: "#ffffff",
-  },
-  successButton: {
-    backgroundColor: "#28a745",
-    borderWidth: 2,
-    borderColor: "#1e7e34",
-  },
-  successButtonText: {
-    color: "#ffffff",
   },
   // Sizes
   smallButton: {
