@@ -3,12 +3,15 @@ import { ProfileStorage } from "@/services/profileStorage";
 import { Profile } from "@/types/profile";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function ProfileScreen() {
   const [profile, setProfile] = useState<Profile>({
-    name: "Úsuario",
-    email: "usuario@email.com",
+    name: "",
+    lastName: "",
+    age: 0,
+    institution: "",
+    course: ""
   });
 
   useFocusEffect(
@@ -33,13 +36,6 @@ export default function ProfileScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Meu Perfil</Text>
 
-      {/* Foto padrão */}
-      <Image
-        source={{ uri: "https://github.com/gialbanes.png" }}
-        style={styles.profileImage}
-      />
-
-      {/* Informações do Perfil */}
       <View style={styles.profileInfo}>
         <View style={styles.infoItem}>
           <Text style={styles.infoLabel}>Nome:</Text>
@@ -47,8 +43,23 @@ export default function ProfileScreen() {
         </View>
 
         <View style={styles.infoItem}>
-          <Text style={styles.infoLabel}>Email:</Text>
-          <Text style={styles.infoValue}>{profile.email}</Text>
+          <Text style={styles.infoLabel}>Sobrenome:</Text>
+          <Text style={styles.infoValue}>{profile.lastName || "Não informado"}</Text>
+        </View>
+
+        <View style={styles.infoItem}>
+          <Text style={styles.infoLabel}>Idade:</Text>
+          <Text style={styles.infoValue}>{profile.age ? `${profile.age} anos` : "Não informado"}</Text>
+        </View>
+
+        <View style={styles.infoItem}>
+          <Text style={styles.infoLabel}>Instituição:</Text>
+          <Text style={styles.infoValue}>{profile.institution || "Não informado"}</Text>
+        </View>
+
+        <View style={styles.infoItem}>
+          <Text style={styles.infoLabel}>Curso:</Text>
+          <Text style={styles.infoValue}>{profile.course || "Não informado"}</Text>
         </View>
       </View>
 
@@ -62,50 +73,64 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    padding: 20,
-    gap: 16,
+    backgroundColor: "#f8f9fa",
+    paddingTop: 60,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 24,
-  },
-  footer: {
-    width: "100%",
-    gap: 12,
-    paddingBottom: 40,
-  },
-  profileImage: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    color: "#0077b5",
+    textAlign: "center",
+    marginBottom: 32,
+    paddingHorizontal: 20,
   },
   profileInfo: {
-    width: "100%",
-    marginBottom: 40,
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   infoItem: {
-    marginBottom: 20,
-    paddingHorizontal: 10,
+    marginBottom: 16,
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   infoLabel: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#666666",
-    marginBottom: 5,
+    color: "#0077b5",
+    marginBottom: 8,
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
   infoValue: {
     fontSize: 18,
     fontWeight: "500",
     color: "#333333",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    backgroundColor: "#f8f8f8",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
+    lineHeight: 24,
+  },
+  footer: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+    paddingTop: 20,
+    backgroundColor: "#ffffff",
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 8,
   },
 });
