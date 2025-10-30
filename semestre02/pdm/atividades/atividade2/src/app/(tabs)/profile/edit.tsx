@@ -1,17 +1,15 @@
 import Button from "@/components/Button";
 import { ProfileStorage } from "@/services/profileStorage";
 import { Profile } from "@/types/profile";
-import Octicons from "@expo/vector-icons/Octicons";
 import * as DocumentPicker from "expo-document-picker";
 import { router, useFocusEffect } from "expo-router";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    Image,
+    StyleSheet,
+    Text,
+    TextInput,
+    View
 } from "react-native";
 
 export default function EditProfileModal() {
@@ -107,7 +105,7 @@ export default function EditProfileModal() {
           onPress={handlePickDocument}
         />
         <Button title="SALVAR" onPress={handleSave} />
-        <Button title="Cancelar" variant="secondary" onPress={handleCancel} />
+        <Button title="Cancelar" variant="outline" onPress={handleCancel} />
       </View>
     </View>
   );

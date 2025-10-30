@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Animated,
   Pressable,
@@ -8,150 +8,250 @@ import {
   View,
 } from "react-native";
 
-type Variant = "primary" | "secondary" | "info";
+type Variant = "primary" | "secondary" | "info" | "danger" | "success" | "outline";
 
 type Props = PressableProps & {
   title: string;
   variant?: Variant;
+  size?: "small" | "medium" | "large";
+  fullWidth?: boolean;
+  icon?: string;
 };
 
-export default function Button({ title, variant = "primary", ...rest }: Props) {
-  const [pressAnim] = useState(new Animated.Value(0));
+export default function Button({ 
+  title, 
+  variant = "primary", 
+  size = "medium",
+  fullWidth = true,
+  icon,
+  ...rest 
+}: Props) {
+  const [scaleAnim] = useState(new Animated.Value(1));
+  const [opacityAnim] = useState(new Animated.Value(1));
 
   const handlePressIn = () => {
-    Animated.timing(pressAnim, {
-      toValue: 1,
-      duration: 100,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.timing(scaleAnim, {
+        toValue: 0.95,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 0.8,
+        duration: 150,
+        useNativeDriver: true,
+      })
+    ]).start();
   };
 
   const handlePressOut = () => {
-    Animated.timing(pressAnim, {
-      toValue: 0,
-      duration: 100,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 150,
+        useNativeDriver: true,
+      })
+    ]).start();
   };
 
-  const translateY = pressAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 4],
-  });
+  const getVariantStyles = () => {
+    switch (variant) {
+      case "secondary":
+        return {
+          button: styles.secondaryButton,
+          text: styles.secondaryButtonText,
+        };
+      case "info":
+        return {
+          button: styles.infoButton,
+          text: styles.infoButtonText,
+        };
+      case "danger":
+        return {
+          button: styles.dangerButton,
+          text: styles.dangerButtonText,
+        };
+      case "success":
+        return {
+          button: styles.successButton,
+          text: styles.successButtonText,
+        };
+      case "outline":
+        return {
+          button: styles.outlineButton,
+          text: styles.outlineButtonText,
+        };
+      default:
+        return {
+          button: styles.primaryButton,
+          text: styles.primaryButtonText,
+        };
+    }
+  };
 
-  const shadowOpacity = pressAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-  });
+  const getSizeStyles = () => {
+    switch (size) {
+      case "small":
+        return {
+          button: styles.smallButton,
+          text: styles.smallText,
+        };
+      case "large":
+        return {
+          button: styles.largeButton,
+          text: styles.largeText,
+        };
+      default:
+        return {
+          button: styles.mediumButton,
+          text: styles.mediumText,
+        };
+    }
+  };
 
-  const buttonShadowVariantStyle =
-    variant === "secondary"
-      ? styles.secondaryButtonShadow
-      : variant === "info"
-      ? styles.infoButtonShadow
-      : styles.primaryButtonShadow;
-  const buttonVariantStyle =
-    variant === "secondary"
-      ? styles.secondaryButton
-      : variant === "info"
-      ? styles.infoButton
-      : styles.primaryButton;
-  const buttonTextVariantStyle =
-    variant === "secondary"
-      ? styles.secondaryButtonText
-      : variant === "info"
-      ? styles.infoButtonText
-      : styles.primaryButtonText;
+  const variantStyles = getVariantStyles();
+  const sizeStyles = getSizeStyles();
+
+  // Remove shadow for transparent buttons
+  const shouldHaveShadow = variant !== "outline";
 
   return (
     <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut} {...rest}>
-      <View style={styles.buttonWrapper}>
-        <Animated.View
-          style={[
-            styles.buttonShadow,
-            buttonShadowVariantStyle,
-            {
-              opacity: shadowOpacity,
-            },
-          ]}
-        />
-        <Animated.View
-          style={[
-            styles.button,
-            buttonVariantStyle,
-            {
-              transform: [{ translateY }],
-            },
-          ]}
-        >
-          <Text style={[styles.buttonText, buttonTextVariantStyle]}>
+      <Animated.View
+        style={[
+          styles.button,
+          !shouldHaveShadow && styles.noShadow,
+          variantStyles.button,
+          sizeStyles.button,
+          fullWidth && styles.fullWidth,
+          {
+            transform: [{ scale: scaleAnim }],
+            opacity: opacityAnim,
+          },
+        ]}
+      >
+        <View style={styles.content}>
+          {icon && <Text style={[styles.icon, variantStyles.text]}>{icon}</Text>}
+          <Text style={[styles.buttonText, variantStyles.text, sizeStyles.text]}>
             {title}
           </Text>
-        </Animated.View>
-      </View>
+        </View>
+      </Animated.View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonWrapper: {
-    position: "relative",
-    width: "100%",
-    height: 56,
-  },
-  buttonShadow: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 56,
-    borderRadius: 16,
-  },
-  primaryButtonShadow: {
-    backgroundColor: "#926D00",
-  },
-  secondaryButtonShadow: {
-    backgroundColor: "#a3a3a3",
-  },
-  infoButtonShadow: {
-    backgroundColor: "#1565C0",
-  },
   button: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 52,
-    borderRadius: 16,
+    borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 2,
-    borderBottomWidth: 0,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
-  primaryButton: {
-    backgroundColor: "#F7c325",
-    borderColor: "#926D00",
+  noShadow: {
+    shadowOpacity: 0,
+    elevation: 0,
   },
-  secondaryButton: {
-    backgroundColor: "#f4f4f4",
-    borderColor: "#bdbdbd",
+  fullWidth: {
+    width: "100%",
   },
-  infoButton: {
-    backgroundColor: "#2196F3",
-    borderColor: "#1565C0",
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    marginRight: 8,
+    fontSize: 18,
   },
   buttonText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    letterSpacing: 1,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  // Variants
+  primaryButton: {
+    backgroundColor: "#0077b5",
+    borderWidth: 2,
+    borderColor: "#005582",
   },
   primaryButtonText: {
-    color: "#5C4400",
+    color: "#ffffff",
+  },
+  secondaryButton: {
+    backgroundColor: "#f8f9fa",
+    borderWidth: 2,
+    borderColor: "#6c757d",
   },
   secondaryButtonText: {
-    color: "#4a4a4a",
+    color: "#6c757d",
+  },
+  outlineButton: {
+    backgroundColor: "transparent",
+    borderWidth: 2,
+    borderColor: "#dc3545",
+  },
+  outlineButtonText: {
+    color: "#dc3545",
+  },
+  infoButton: {
+    backgroundColor: "#17a2b8",
+    borderWidth: 2,
+    borderColor: "#138496",
   },
   infoButtonText: {
-    color: "#FFFFFF",
+    color: "#ffffff",
+  },
+  dangerButton: {
+    backgroundColor: "#dc3545",
+    borderWidth: 2,
+    borderColor: "#c82333",
+  },
+  dangerButtonText: {
+    color: "#ffffff",
+  },
+  successButton: {
+    backgroundColor: "#28a745",
+    borderWidth: 2,
+    borderColor: "#1e7e34",
+  },
+  successButtonText: {
+    color: "#ffffff",
+  },
+  // Sizes
+  smallButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    minHeight: 36,
+  },
+  mediumButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    minHeight: 48,
+  },
+  largeButton: {
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    minHeight: 56,
+  },
+  smallText: {
+    fontSize: 14,
+  },
+  mediumText: {
+    fontSize: 16,
+  },
+  largeText: {
+    fontSize: 18,
   },
 });
