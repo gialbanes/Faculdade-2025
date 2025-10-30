@@ -55,9 +55,8 @@ export default function EditProfileModal() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Editar Perfil</Text>
-
-      {/* Informações do Perfil */}
+    <Text style={styles.title}>Editar perfil</Text>
+    
       <View style={styles.profileInfo}>
 
         <View style={styles.infoItem}>

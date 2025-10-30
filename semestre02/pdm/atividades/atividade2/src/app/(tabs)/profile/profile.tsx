@@ -34,7 +34,7 @@ export default function ProfileScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Meu Perfil</Text>
+      <Text style={styles.title}>Meu perfil</Text>
 
       <View style={styles.profileInfo}>
         <View style={styles.infoItem}>
