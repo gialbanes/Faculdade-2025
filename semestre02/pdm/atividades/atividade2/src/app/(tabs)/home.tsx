@@ -21,10 +21,10 @@ export default function HomePage() {
                 <View style={styles.card}>
                     <Text style={styles.cardTitle}>Comece sua jornada</Text>
                     <Text style={styles.cardDescription}>
-                        Crie seu perfil profissional e mostre suas habilidades para o mundo
+                        Criamos um perfil padrão pra você!
                     </Text>
                     <TouchableOpacity style={styles.button} onPress={callProfile}>
-                        <Text style={styles.buttonText}>Criar Perfil</Text>
+                        <Text style={styles.buttonText}>Visualizar perfil</Text>
                     </TouchableOpacity>
                 </View>
             </View>
